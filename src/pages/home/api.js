@@ -7,3 +7,8 @@ const pre = '/mock'
  * @returns axios promise
  */
 export const getProductList = () => axios.post(`${pre}/product/getProductList`)
+/**
+ * @desc 获取banner列表
+ * @returns axios promise
+ */
+export const getAdvertising = () => axios.post(`${pre}/advertising/getAdvertisingList`)

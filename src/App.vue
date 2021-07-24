@@ -1,12 +1,6 @@
 <template>
   <div id="app">
-    app
     <div class="link-wrap">
-      <router-link to="/">to home</router-link>
-      &nbsp;&nbsp;
-      <router-link to="/a">page a</router-link>
-      &nbsp;&nbsp;
-      <router-link to="/b">page b</router-link>
     </div>
     <!-- 渲染不销毁组件 -->
     <keep-alive v-if="route.meta.keepAlive">
@@ -37,6 +31,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="less" scoped>
+#app {
+  background-color: #F4F4F4;
+  // 高度为设备高度
+  height: 100vh;
+}
 </style>

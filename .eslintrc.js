@@ -3,6 +3,7 @@ module.exports = {
   env: {
     node: true
   },
+  // "space-before-function-paren": 0,
   extends: [
     'plugin:vue/essential',
     '@vue/standard'

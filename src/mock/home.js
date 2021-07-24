@@ -12,13 +12,43 @@ const getAdvertising = (request, response) => {
     errorCode: 0,
     errorMessage: 'success',
     data: {
-      advertising_list: [{
-        id: 27,
-        title: '特供',
-        link: '/pages/productDetail/index?id=295',
-        image: 'http://saidad.oss-cn-guangzhou.aliyuncs.com/image/0b9709b4490830a47ad5b370b6a696ca.jpeg',
-        type: 'image'
-      }]
+      advertising_list: [
+        {
+          id: 27,
+          title: '特供',
+          link: '/pages/productDetail/index?id=295',
+          image: 'http://saidad.oss-cn-guangzhou.aliyuncs.com/image/0b9709b4490830a47ad5b370b6a696ca.jpeg',
+          type: 'image'
+        },
+        {
+          id: 28,
+          title: '特供1',
+          link: '/pages/productDetail/index?id=295',
+          image: 'http://saidad.oss-cn-guangzhou.aliyuncs.com/image/0b9709b4490830a47ad5b370b6a696ca.jpeg',
+          type: 'image'
+        },
+        {
+          id: 29,
+          title: '特供2',
+          link: '/pages/productDetail/index?id=295',
+          image: 'http://saidad.oss-cn-guangzhou.aliyuncs.com/image/0b9709b4490830a47ad5b370b6a696ca.jpeg',
+          type: 'image'
+        },
+        {
+          id: 30,
+          title: '特供3',
+          link: '/pages/productDetail/index?id=295',
+          image: 'http://saidad.oss-cn-guangzhou.aliyuncs.com/image/0b9709b4490830a47ad5b370b6a696ca.jpeg',
+          type: 'image'
+        },
+        {
+          id: 31,
+          title: '特供4',
+          link: '/pages/productDetail/index?id=295',
+          image: 'http://saidad.oss-cn-guangzhou.aliyuncs.com/image/0b9709b4490830a47ad5b370b6a696ca.jpeg',
+          type: 'image'
+        }
+      ]
     },
     success: true
   }
