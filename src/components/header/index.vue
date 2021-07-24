@@ -1,17 +1,26 @@
 <template>
   <div class="main-header">
     <div class="back-warp"></div>
-    <div class="title">AWSL Flower</div>
+    <div class="title">{{title}}</div>
     <div class="more-icon"></div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    title: {
+      type: String,
+      default: 'AWSL Flower'
+    }
+  }
+}
+</script>
 
 <style lang="less" scoped>
 .main-header {
   position: relative;
   height: 120px;
   background-color: #fff;
-  border-bottom: 1px solid #f00;
   display: flex;
   justify-content: center;
   align-items: center;

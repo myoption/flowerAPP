@@ -62,8 +62,13 @@ export default {
 
 <style lang="less" scoped>
 .home-wrap {
-  // 计算高度 才能解决遮盖
-  height: calc(100vh - 140px);
+  // 计算高度 才能解决遮盖 方式1
+/*   height: calc(100vh - 140px);
+  overflow: auto; */
+  // 方式2
+  height: 100vh;
+  // padding-bottom: 100px;
+  box-sizing: border-box;
   overflow: auto;
 }
 </style>

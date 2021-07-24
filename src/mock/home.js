@@ -63,7 +63,7 @@ const getAdvertising = (request, response) => {
  * @returns { object } json 对象
  */
 const getProductList = (request, response) => {
-  console.log(request, request)
+  // console.log(request, request)
   const list = [
     {
       base_info: {

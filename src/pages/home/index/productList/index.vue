@@ -51,6 +51,7 @@ export default {
   .product-text {
     font-size: 28px;
     font-weight: 600;
+    margin-left: 10px;
   }
   .product-container {
     margin-bottom: 30px;

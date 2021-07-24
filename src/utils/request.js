@@ -5,7 +5,7 @@ import { Toast } from 'vant'
 import * as sysConfig from './config'
 
 const timeout = 60000 // 超时时间 默认1分钟
-const baseURL = 'http://localhost:8080'
+const baseURL = 'http://localhost:3333'
 // 创建axios实例
 const request = axios.create({
   timeout,
