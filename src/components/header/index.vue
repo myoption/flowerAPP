@@ -1,10 +1,19 @@
 <template>
   <div class="main-header">
-    <div class="back-warp"></div>
+    <!--
+    <HeaderComponent title="文章详情">
+      slot传入返回按钮
+      <div class="go-back-warp" slot="left">
+        <van-icon name="revoke" @click="goBack"/>
+      </div>
+    </HeaderComponent>
+     -->
+    <slot name="left"></slot>
     <div class="title">{{title}}</div>
     <div class="more-icon"></div>
   </div>
 </template>
+
 <script>
 export default {
   props: {
@@ -28,6 +37,10 @@ export default {
     margin: 0 120px;
     text-align: center;
     font-size: 38px;
+  }
+  .go-back-warp {
+    position: absolute;
+    left: 20px;
   }
 }
 </style>

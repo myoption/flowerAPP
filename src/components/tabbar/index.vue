@@ -17,5 +17,7 @@ export default {
 <style lang="less" scoped>
 .tabbar-wrap {
   height: 100px;
+  position: fixed;
+  bottom: 0;
 }
 </style>

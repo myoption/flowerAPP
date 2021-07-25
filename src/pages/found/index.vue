@@ -2,10 +2,12 @@
   <div class="found-wrap">
     <!-- 属性不绑定 直接传值 -->
     <HeaderComponent title="发现"></HeaderComponent>
-    <List
-    v-for="item in list"
-    :key="item.nanoid"
-    ></List>
+    <div class="found-list-wrap">
+      <List
+      v-for="item in list" :item="item"
+      :key="item.nanoid"
+      ></List>
+    </div>
   </div>
 </template>
 
@@ -38,7 +40,7 @@ export default {
         this.list = feed_info_list.map(item => ({ ...item, nanoid: nanoid() }))
         this.page_info = page_info
       }
-      // console.log('found', res)
+      // console.log('found', this.list)
     }
   },
   mounted () {
@@ -50,8 +52,11 @@ export default {
 <style lang="less" scoped>
 .found-wrap {
   height: 100vh;
-  // padding-bottom: 110px;
+  padding-bottom: 110px;
   box-sizing: border-box;
   overflow: auto;
+  .found-list-wrap {
+    padding: 0 10px;
+  }
 }
 </style>

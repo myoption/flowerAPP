@@ -24,8 +24,8 @@ export default {
   name: 'Home',
   data () {
     return {
-      page_info: [],
-      product_list: {}
+      page_info: {},
+      product_list: []
     }
   },
   components: {
@@ -47,7 +47,7 @@ export default {
     }),
     async getProductList () {
       const res = await request.getProductList()
-      console.log('res', res)
+      // console.log('res', res)
       //  报错 Identifier 'page_info' is not in camel case
       // const { page_info, product_list } = res.data
       this.page_info = res.data.page_info
@@ -67,7 +67,7 @@ export default {
   overflow: auto; */
   // 方式2
   height: 100vh;
-  // padding-bottom: 100px;
+  padding-bottom: 110px;
   box-sizing: border-box;
   overflow: auto;
 }
