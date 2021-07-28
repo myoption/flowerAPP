@@ -9,7 +9,8 @@
     <!-- 渲染可销毁组件 -->
     <router-view v-else></router-view>
     <!-- 渲染tabbar -->
-    <Tabbar></Tabbar>
+    <!-- 登录页不显示 -->
+    <Tabbar v-show="route.name !== 'Login'"></Tabbar>
   </div>
 </template>
 
@@ -22,6 +23,7 @@ export default {
   },
   computed: {
     route () {
+      // console.log(this.$route)
       return this.$route
     }
   },

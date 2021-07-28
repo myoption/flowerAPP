@@ -1,13 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
-import Vant from 'vant'
 import store from './store'
 import router from './router'
 import request from './utils/request'
-import 'vant/lib/index.css' // 样式文件单独引入
 import 'amfe-flexible'
-
-Vue.use(Vant)
+import './vant'
 
 Vue.config.productionTip = false
 // 挂载axios

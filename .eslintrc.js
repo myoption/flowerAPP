@@ -14,6 +14,7 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'camelcase': [1, {"properties": "never"}]
+    'camelcase': [1, { "properties": "never" }],
+    "quote-props": [1, "as-needed"]
   }
 }

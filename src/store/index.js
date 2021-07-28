@@ -14,6 +14,23 @@ const modules = {
 
 // 创建store
 const store = new Vuex.Store({
+  state: {
+    globalInfo: {
+      user: {
+        name: 'leo',
+        age: 11
+      }
+    }
+  },
+  mutations: {
+    /**
+     * @desc 更新用户数据
+     */
+    updateUserInfo (state, info) {
+      state.globalInfo.user = info
+      // console.log('state', state)
+    }
+  },
   modules,
   plugins: [createPersistedState({
     key: '$vuex'

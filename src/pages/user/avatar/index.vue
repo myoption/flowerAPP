@@ -7,10 +7,10 @@
             round
             width="60"
             height="60"
-            src="https://img.yzcdn.cn/vant/cat.jpeg"
+            :src="userInfo.avatar"
           />
         </van-col>
-        <van-col span="8" class="user-name van-ellipsis">白白富美白富美白富美白富美白富美白富美白富美白富美富美</van-col>
+        <van-col span="8" class="user-name van-ellipsis">{{userInfo.nick_name}}</van-col>
       </van-row>
     </van-col>
     <van-col span="6" class="shop-cart">
@@ -22,6 +22,7 @@
 <script type="text/javascript">
 import ShopCart from './shop-cart.vue'
 export default {
+  props: ['userInfo'],
   data () {
     return {
     }

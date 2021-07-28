@@ -3,7 +3,7 @@ import User from '../pages/user'
 
 export default [
   {
-    name: '我的',
+    name: 'User',
     path: '/user',
     component: User
   }

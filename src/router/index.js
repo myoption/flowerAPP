@@ -3,13 +3,15 @@ import VueRouter from 'vue-router'
 import home from './home'
 import found from './found'
 import user from './user'
+import login from './login'
 
 Vue.use(VueRouter)
 
 const routes = [
   ...home,
   ...found,
-  ...user
+  ...user,
+  ...login
 ]
 
 // console.log(routes)

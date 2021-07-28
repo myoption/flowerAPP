@@ -1,7 +1,7 @@
 <template>
   <div class="user-wrap">
     <HeaderComponent title="个人中心"></HeaderComponent>
-    <UserAvatar></UserAvatar>
+    <UserAvatar :userInfo="user"></UserAvatar>
     <UserDate></UserDate>
     <UserOrder></UserOrder>
     <UserContact></UserContact>
@@ -16,10 +16,18 @@ import UserDate from './date'
 import UserOrder from './order'
 import UserContact from './contact'
 import UserOnlineService from './online-service'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
     }
+  },
+  computed: {
+    // ...mapState(['globalInfo'])
+    // 第二种使用方式
+    ...mapState({
+      user: state => state.globalInfo.user
+    })
   },
   components: {
     HeaderComponent,
@@ -30,6 +38,9 @@ export default {
     UserOnlineService
   },
   methods: {
+  },
+  mounted () {
+    // console.log(this.globalInfo)
   }
 }
 </script>
