@@ -1,9 +1,9 @@
 <template>
   <div class="category-wrap">
-    <div class="type-item type-item-left">
+    <div class="type-item type-item-left" @click="goToList">
       <van-icon name="gift-o" color="red" /><span>包月鲜花</span>
       </div>
-    <div class="type-item type-item-right">
+    <div class="type-item type-item-right" @click="goToList">
       <van-icon name="goods-collect-o" color="red"/><span>礼品鲜花</span>
       </div>
   </div>
@@ -18,6 +18,9 @@ export default {
   components: {
   },
   methods: {
+    goToList () {
+      this.$router.push('/month-product')
+    }
   }
 }
 </script>

@@ -1,6 +1,5 @@
 <template>
   <div class="product-list">
-    <h3 class="product-list-title">新品推荐</h3>
       <van-row justify="space-between" gutter="10" class="product-wrap">
         <van-col span="12" v-for="(item, index) in list" :key="index" >
           <div class="product-container">

@@ -47,9 +47,6 @@ export default {
     }),
     async getProductList () {
       const res = await request.getProductList()
-      // console.log('res', res)
-      //  报错 Identifier 'page_info' is not in camel case
-      // const { page_info, product_list } = res.data
       this.page_info = res.data.page_info
       this.product_list = res.data.product_list
     }

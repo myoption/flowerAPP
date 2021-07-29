@@ -4,6 +4,7 @@ import home from './home'
 import found from './found'
 import user from './user'
 import login from './login'
+import monthproduct from './month-product'
 
 Vue.use(VueRouter)
 
@@ -11,7 +12,8 @@ const routes = [
   ...home,
   ...found,
   ...user,
-  ...login
+  ...login,
+  ...monthproduct
 ]
 
 // console.log(routes)

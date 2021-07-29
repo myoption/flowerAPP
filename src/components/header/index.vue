@@ -1,14 +1,10 @@
 <template>
   <div class="main-header">
-    <!--
-    <HeaderComponent title="文章详情">
-      slot传入返回按钮
-      <div class="go-back-warp" slot="left">
+    <slot name="left">
+      <div class="go-back-warp" v-if="showGoBack">
         <van-icon name="revoke" @click="goBack"/>
       </div>
-    </HeaderComponent>
-     -->
-    <slot name="left"></slot>
+    </slot>
     <div class="title">{{title}}</div>
     <div class="more-icon"></div>
   </div>
@@ -20,6 +16,15 @@ export default {
     title: {
       type: String,
       default: 'AWSL Flower'
+    },
+    showGoBack: {
+      type: Boolean,
+      default: false
+    }
+  },
+  methods: {
+    goBack () {
+      this.$router.go(-1)
     }
   }
 }

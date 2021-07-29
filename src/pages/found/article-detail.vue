@@ -1,10 +1,10 @@
 <template>
   <div class="article-detail-wrap">
-    <HeaderComponent title="文章详情">
+    <HeaderComponent title="文章详情" :showGoBack="true">
       <!-- slot传入返回按钮 -->
-      <div class="go-back-warp" slot="left">
+      <!-- <div class="go-back-warp" slot="left">
         <van-icon name="revoke" @click="goBack"/>
-      </div>
+      </div> -->
     </HeaderComponent>
     <!-- 展示数据有2种方式 可以直接用富文本展示 需要后台配合 另外一种就是根据数据进行渲染 -->
     <!--   需要动态渲染组件 因为不同文章内图片 文字数等不同
@@ -69,10 +69,6 @@ export default {
         this.detail = res.data
       }
       // console.log('articl', res.data)
-    },
-    goBack () {
-      // console.log('click')
-      this.$router.go(-1)
     }
   },
   mounted () {

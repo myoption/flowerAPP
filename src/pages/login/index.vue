@@ -83,6 +83,8 @@ export default {
         const rejectUrl = localStorage.getItem(config.REJECTURL)
         // 登录成功 需要重定向
         const path = rejectUrl || '/'
+        // 删除重定向数据
+        sessionStorage.removeItem(config.REJECTURL)
         // 更新用户数据
         this.updateUserInfo(user)
         // 使用replace 将当前path history 替换
