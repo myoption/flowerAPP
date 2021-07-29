@@ -4,8 +4,8 @@
     </HeaderComponent>
     <!-- tab标签 -->
     <div class="tab-wrap">
-      <van-tabs>
-        <van-tab v-for="(item, index) in tabs" :key="index " :title="item.label" >
+      <van-tabs @change="tabChange" v-model="active">
+        <van-tab v-for="(item, index) in tabs" :key="index " :title="item.label" class="tab-list">
           <div class="img-wrap">
             <van-image
             height="180"
@@ -13,15 +13,17 @@
             :src="item.src"
             />
           </div>
-          <FilterComponent></FilterComponent>
-          <van-list
-            v-model="loading"
-            :finished="finished"
-            finished-text="没有更多了"
-            @load="onLoad"
-          >
-          <FilterListComponent :list="list"></FilterListComponent>
-          </van-list>
+          <FilterComponent @priceChange="filterPrice"></FilterComponent>
+          <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+            <van-list
+              v-model="loading"
+              :finished="pageData[item.key].finished"
+              finished-text="没有更多了"
+              @load="getProductList"
+            >
+            <FilterListComponent :list="pageData[item.key].list" ></FilterListComponent>
+            </van-list>
+          </van-pull-refresh>
         </van-tab>
       </van-tabs>
     </div>
@@ -36,22 +38,39 @@ import * as request from '../home/api'
 export default {
   data () {
     return {
+      active: 0,
       loading: false,
       finished: true,
+      loadMore: false,
+      refreshing: false,
       list: [],
       page_info: {},
       tabs: [
         {
-          name: 'month',
+          key: 'month',
           label: '包月鲜花',
           src: 'http://saidad.oss-cn-guangzhou.aliyuncs.com/image/b77d1bfb872925b89ff50506ce417125.jpeg'
         },
         {
-          name: 'gift',
+          key: 'gift',
           label: '礼品鲜花',
           src: 'http://saidad.oss-cn-guangzhou.aliyuncs.com/image/eb209ef395fe09dc0db6a36ba2c2a5ca.jpeg'
         }
-      ]
+      ],
+      pageData: {
+        month: {
+          list: [],
+          page_info: { index: 1, count: 10 },
+          filterObj: {},
+          finished: false
+        },
+        gift: {
+          list: [],
+          page_info: { index: 1, count: 10 },
+          filterObj: {},
+          finished: true
+        }
+      }
     }
   },
   components: {
@@ -60,30 +79,116 @@ export default {
     FilterListComponent
   },
   methods: {
-    onLoad () {
-
-    },
+    /**
+     * @desc 加载数据公共入口
+     */
     async getProductList () {
+      this.loadMore = true
+      this.tabChange()
+    },
+    /**
+     * @desc 下拉刷新
+     */
+    onRefresh () {
+      const { currentKey } = this
+      // 无数据
+      const initPageInfo = {
+        list: [],
+        page_info: { index: 1, count: 10 }
+      }
+      // 情况数据 更新对应tab的页面数据 然后调用加载更多
+      this.pageData[currentKey] = {
+        ...this.pageData[currentKey],
+        ...initPageInfo
+      }
+      console.log('下拉刷新')
+      this.tabChange()
+    },
+    /**
+     * @desc 接收子组件的传值
+     */
+    filterPrice (filterObj) {
+      console.log(filterObj)
+    },
+    /**
+     * @desc tab切换事件
+     */
+    tabChange () {
+      let { currentKey, pageData, loadMore } = this
+      const info = pageData[currentKey]
+      // 没有缓存数据才发请求
+      if (pageData[currentKey].list.length === 0) {
+        currentKey === 'month' ? this.loadMonthInfo(info.page_info) : this.loadGiftInfo(info.page_info)
+      } else if (loadMore) {
+        console.log('more')
+        const pageInfo = {
+          index: info.page_info.index + 1,
+          count: 10
+        }
+        currentKey === 'month' ? this.loadMonthInfo(pageInfo) : this.loadGiftInfo(pageInfo)
+        // 每次加载一页
+        info.finished = true
+        // console.log(pageData[currentKey])
+      }
+      loadMore = false
+    },
+    /**
+     * @desc 请求gift列表数据
+     */
+    async loadGiftInfo () {
+      // console.log('gift')
       const res = await request.getProductList()
       // console.log(res)
       if (res && res.errorCode === 0) {
-        this.page_info = res.data.page_info
-        this.list = res.data.product_list
+        this.pageData.gift.page_info = res.data.page_info
+        this.pageData.gift.list = res.data.product_list
       }
+      this.loading = false
+      this.finished = true
+    },
+    /**
+     * @desc 请求month列表数据
+     */
+    async loadMonthInfo () {
+      // console.log('month')
+      const res = await request.getProductList()
+      // console.log('res', res)
+      if (res && res.errorCode === 0) {
+        this.pageData.month.page_info = res.data.page_info
+        this.pageData.month.list = res.data.product_list
+      }
+      this.loading = false
+      this.finished = true
     }
   },
   mounted () {
-    this.getProductList()
+    this.tabChange()
+  },
+  computed: {
+    /**
+     * @desc 计算当前key
+     */
+    currentKey () {
+      // 提高性能
+      const { active, tabs } = this
+      return tabs[active].key
+    }
   }
 }
 </script>
 
 <style lang="less" scoped>
 .month-product-wrap {
-  height: 100vh;
-  padding-bottom: 110px;
-  overflow: auto;
-  box-sizing: border-box;
+  // 去除外面盒子的高度
+  // height: 100vh;
+  // padding-bottom: 110px;
+  // overflow: auto;
+  // box-sizing: border-box;
+  // 给滚动区域设置高度
+  .tab-list {
+    height: calc(100vh - 300px);
+    overflow: auto;
+  }
   .tab-wrap {
     border-top: 1px solid rgba(0, 0, 0,0.1);
     padding: 0 20px;

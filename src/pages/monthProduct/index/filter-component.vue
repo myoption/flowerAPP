@@ -21,11 +21,29 @@ export default {
   methods: {
     // 切换filter tab
     changeTab (id) {
+      const keys = [
+        'all',
+        'new',
+        'price'
+      ]
+      let filterObj = {
+        filterKeys: id,
+        filter: keys[id]
+      }
       // 设置价格排序 同时激活对应三角形
-      this.active = id
+
       if (id === 2) {
         this.top = this.active !== 2 ? 0 : (this.top === 0 ? 1 : 0)
       }
+      // 价格多一个排序参数
+      filterObj = {
+        ...filterObj,
+        sort: this.top === 0 ? 'DSC' : 'ASC'
+      }
+      // console.log(filterObj)
+      // 向父组件传值 带上价格排序参数
+      this.$emit('priceChange', filterObj)
+      this.active = id
     }
   }
 }

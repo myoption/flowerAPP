@@ -43,7 +43,6 @@ export default {
 <style lang="less" scoped>
 .product-list {
   margin-top: 20px;
-  padding: 0 20px;
   .product-list-title {
       text-align: center;
   }
