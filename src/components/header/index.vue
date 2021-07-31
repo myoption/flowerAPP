@@ -2,10 +2,10 @@
   <div class="main-header">
     <slot name="left">
       <div class="go-back-warp" v-if="showGoBack">
-        <van-icon name="revoke" @click="goBack"/>
+        <van-icon name="arrow-left" @click="goBack"/>
       </div>
     </slot>
-    <div class="title">{{title}}</div>
+    <div class="title van-ellipsis">{{title}}</div>
     <div class="more-icon"></div>
   </div>
 </template>

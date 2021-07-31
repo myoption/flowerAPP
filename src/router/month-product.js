@@ -1,4 +1,4 @@
-const MonthProduct = () => import('../pages/monthProduct')
+const MonthProduct = () => import(/* webpackChunkName: "month-product" */ '../pages/monthProduct')
 
 export default [
   {

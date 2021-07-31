@@ -10,7 +10,7 @@
     <router-view v-else></router-view>
     <!-- 渲染tabbar -->
     <!-- 登录页不显示 -->
-    <Tabbar v-show="route.name !== 'Login'"></Tabbar>
+    <Tabbar v-show="isShowTabbar()"></Tabbar>
   </div>
 </template>
 
@@ -23,12 +23,18 @@ export default {
   },
   computed: {
     route () {
-      // console.log(this.$route)
       return this.$route
     }
   },
   mounted () {
     // console.log(this)
+  },
+  methods: {
+    isShowTabbar () {
+      // 这样更简洁
+      const names = ['Login', 'ProductDetail']
+      return !names.includes(this.route.name)
+    }
   }
 }
 </script>

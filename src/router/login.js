@@ -1,5 +1,5 @@
 
-const Login = () => import('../pages/login')
+const Login = () => import(/* webpackChunkName: "login" */'../pages/login')
 
 export default [
   {

@@ -1,7 +1,7 @@
 <template>
   <div class="product-list">
       <van-row justify="space-between" gutter="10" class="product-wrap">
-        <van-col span="12" v-for="(item, index) in list" :key="index" >
+        <van-col span="12" v-for="(item, index) in list" :key="index" @click.stop="toDetail(item.base_info.item_id)">
           <div class="product-container">
           <van-image
             :src="item.base_info.main_image"
@@ -33,6 +33,12 @@ export default {
   components: {
   },
   methods: {
+    /**
+     * @desc 进入商品详情页
+     */
+    toDetail (id) {
+      this.$router.push(`/product-detail/${id}`)
+    }
   },
   mounted () {
     // console.log(this.list)

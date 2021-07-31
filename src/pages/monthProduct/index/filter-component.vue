@@ -34,11 +34,11 @@ export default {
 
       if (id === 2) {
         this.top = this.active !== 2 ? 0 : (this.top === 0 ? 1 : 0)
-      }
-      // 价格多一个排序参数
-      filterObj = {
-        ...filterObj,
-        sort: this.top === 0 ? 'DSC' : 'ASC'
+        // 价格多一个排序参数
+        filterObj = {
+          ...filterObj,
+          sort: this.top === 1 ? 'DEC' : 'ASC'
+        }
       }
       // console.log(filterObj)
       // 向父组件传值 带上价格排序参数

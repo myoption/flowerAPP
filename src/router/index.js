@@ -5,7 +5,7 @@ import found from './found'
 import user from './user'
 import login from './login'
 import monthproduct from './month-product'
-
+import ProductDetail from './product-detail'
 Vue.use(VueRouter)
 
 const routes = [
@@ -13,7 +13,8 @@ const routes = [
   ...found,
   ...user,
   ...login,
-  ...monthproduct
+  ...monthproduct,
+  ...ProductDetail
 ]
 
 // console.log(routes)

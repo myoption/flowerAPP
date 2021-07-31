@@ -14,6 +14,7 @@
             />
           </div>
           <FilterComponent @priceChange="filterPrice"></FilterComponent>
+          <!-- 下拉刷新组件 -->
           <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
             <van-list
               v-model="loading"
@@ -108,57 +109,70 @@ export default {
      * @desc 接收子组件的传值
      */
     filterPrice (filterObj) {
-      console.log(filterObj)
+      // console.log(filterObj)
+      const { currentKey } = this
+      // 无数据
+      const initPageInfo = {
+        list: [],
+        page_info: { index: 1, count: 10 },
+        filterObj
+      }
+      // 情况数据 更新对应tab的页面数据 然后调用加载更多
+      this.pageData[currentKey] = initPageInfo
+      this.tabChange()
     },
     /**
      * @desc tab切换事件
      */
     tabChange () {
-      let { currentKey, pageData, loadMore } = this
+      const { currentKey, pageData, loadMore } = this
       const info = pageData[currentKey]
-      // 没有缓存数据才发请求
-      if (pageData[currentKey].list.length === 0) {
-        currentKey === 'month' ? this.loadMonthInfo(info.page_info) : this.loadGiftInfo(info.page_info)
-      } else if (loadMore) {
-        console.log('more')
-        const pageInfo = {
-          index: info.page_info.index + 1,
-          count: 10
-        }
-        currentKey === 'month' ? this.loadMonthInfo(pageInfo) : this.loadGiftInfo(pageInfo)
-        // 每次加载一页
-        info.finished = true
-        // console.log(pageData[currentKey])
+      const params = {
+        ...info.page_info,
+        ...info.filterObj
       }
-      loadMore = false
+      // 如果是下拉加载 更新请求参数
+      if (loadMore) {
+        // console.log('more')
+        params.index = info.page_info.index + 1
+        // 是否完成根据接口 has_more 取反
+        // info.finished = true
+      }
+      currentKey === 'month' ? this.loadMonthInfo(params) : this.loadGiftInfo(params)
+      // 处理刷新状态
+      this.refreshing = false
+      this.loadMore = false
     },
     /**
      * @desc 请求gift列表数据
      */
-    async loadGiftInfo () {
+    async loadGiftInfo (pageInfo) {
       // console.log('gift')
-      const res = await request.getProductList()
+      const res = await request.getProductList(pageInfo)
+      this.pageData.gift.loading = false
+      this.pageData.gift.finished = true
       // console.log(res)
       if (res && res.errorCode === 0) {
         this.pageData.gift.page_info = res.data.page_info
-        this.pageData.gift.list = res.data.product_list
+        // 数据合并
+        this.pageData.gift.list = [...this.pageData.gift.list, ...res.data.product_list]
       }
-      this.loading = false
-      this.finished = true
     },
     /**
      * @desc 请求month列表数据
      */
-    async loadMonthInfo () {
+    async loadMonthInfo (pageInfo) {
       // console.log('month')
-      const res = await request.getProductList()
+      const res = await request.getProductList(pageInfo)
+      this.pageData.month.loading = false
+      this.pageData.month.finished = true
       // console.log('res', res)
       if (res && res.errorCode === 0) {
         this.pageData.month.page_info = res.data.page_info
-        this.pageData.month.list = res.data.product_list
+        // 是否有更多数据 有的话 finished == fasle
+        // this.pageData[tabKey].finished = !page_info.has_more
+        this.pageData.month.list = [...this.pageData.month.list, ...res.data.product_list]
       }
-      this.loading = false
-      this.finished = true
     }
   },
   mounted () {
