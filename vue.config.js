@@ -1,6 +1,7 @@
 const HomeMockApi = require('./src/mock/home')
 const LoginMockApi = require('./src/mock/login')
 const FoundMockAPI = require('./src/mock/found')
+const ShopCartMockAPI = require('./src/mock/shopcart')
 // 引入自动转化为rem
 const autoprefixer = require('autoprefixer')
 const pxtorem = require('postcss-pxtorem')
@@ -21,6 +22,8 @@ module.exports = {
       LoginMockApi(app)
       // 发现页mock接口
       FoundMockAPI(app)
+      // 购物车mock接口
+      ShopCartMockAPI(app)
     }
   },
   // 配置自动转化为rem

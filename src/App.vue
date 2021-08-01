@@ -32,7 +32,7 @@ export default {
   methods: {
     isShowTabbar () {
       // 这样更简洁
-      const names = ['Login', 'ProductDetail']
+      const names = ['Login', 'ProductDetail', 'ShopCart', 'ToPay']
       return !names.includes(this.route.name)
     }
   }

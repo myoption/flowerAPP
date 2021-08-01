@@ -11,16 +11,21 @@
         <DetailComponent :productDetaiInfo="productDetaiInfo" class="product-detail-content"></DetailComponent>
       </div>
     </div>
+    <ShopCartComponent :info="productDetaiInfo.base_info"></ShopCartComponent>
   </div>
 </template>
 
 <script type="text/javascript">
 import HeraderComponent from '../../components/header'
 import DetailComponent from './detail/detail'
+import ShopCartComponent from './shopcart'
+
 import * as api from './api'
 export default {
   data () {
     return {
+      // 控制添加到购物车的显示
+      show: false,
       productDetaiInfo: {
         base_info: {
           product_name: '商品详情'
@@ -33,7 +38,8 @@ export default {
   },
   components: {
     HeraderComponent,
-    DetailComponent
+    DetailComponent,
+    ShopCartComponent
   },
   methods: {
     /**

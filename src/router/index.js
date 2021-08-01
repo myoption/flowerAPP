@@ -6,6 +6,7 @@ import user from './user'
 import login from './login'
 import monthproduct from './month-product'
 import ProductDetail from './product-detail'
+import ShopCart from './shopcart'
 Vue.use(VueRouter)
 
 const routes = [
@@ -14,7 +15,8 @@ const routes = [
   ...user,
   ...login,
   ...monthproduct,
-  ...ProductDetail
+  ...ProductDetail,
+  ...ShopCart
 ]
 
 // console.log(routes)
