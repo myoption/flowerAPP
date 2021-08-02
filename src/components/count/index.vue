@@ -1,5 +1,5 @@
 <template>
-  <div class="goods-num" :style="{ width: width + '%'}">
+  <div class="goods-num" :style="{ width: width + '%'}" :button-size="buttonsize">
     <span>{{title}}</span>
     <van-stepper v-model.number="number"  integer @change="numChange"/>
   </div>
@@ -19,6 +19,14 @@ export default {
     width: {
       type: Number,
       default: 76
+    },
+    buttonsize: {
+      type: String,
+      default: '32px'
+    },
+    id: {
+      type: Number,
+      default: 1
     }
   },
   data () {
@@ -30,7 +38,7 @@ export default {
   },
   methods: {
     numChange () {
-      this.$emit('numChange', this.number)
+      this.$emit('numChange', this.number, this.id)
     }
   },
   created () {

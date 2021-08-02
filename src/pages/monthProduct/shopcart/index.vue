@@ -4,7 +4,7 @@
     <van-tabbar route>
       <van-tabbar-item  to="/my-shopcart" class="tabbar-item-left">
       <span class="my-shopcart">
-        <van-icon name="cart-o" color="#1989fa" badge="9"/>
+        <van-icon name="cart-o" color="#1989fa" :badge="goodsNum"/>
       </span>
       </van-tabbar-item>
       <van-tabbar-item>
@@ -13,7 +13,7 @@
       type="warning"
       class="btn btn-to-add"
       @click="openPopup"
-      >添加到购物车</van-button>
+      >加入购物车</van-button>
       </van-tabbar-item>
       <van-tabbar-item  to="/immediately-to-pay">
       <van-button round type="danger" class="btn btn-to-pay" >立即购买</van-button>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import AddToMyCartComponent from './addToMyShopCart'
 export default {
   props: {
@@ -41,6 +42,9 @@ export default {
   },
   computed: {
     // show:
+    ...mapGetters('shopCart', {
+      goodsNum: 'goodsNum'
+    })
   },
   methods: {
     openPopup () {
@@ -68,9 +72,12 @@ export default {
   .tabbar-item-left {
     margin-left: -80px;
   }
+  .btn-to-add {
+    transform: translateX(60px);
+  }
   .btn {
-    width: 240px;
-    height: 70px;
+    width: 200px;
+    height: 60px;
     border: none;
   }
 }

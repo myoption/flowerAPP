@@ -54,6 +54,7 @@ const getShopCartList = (request, response) => {
         'item_id': 393,
         'sku_id': 0,
         'sort': 36,
+        'goodsNum': 1,
         'main_image': 'http://saidad.oss-cn-guangzhou.aliyuncs.com/image/7f0008089c9174ee43c81af2a25ce788.jpeg'
       },
       'specifications': null,

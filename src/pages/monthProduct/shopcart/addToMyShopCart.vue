@@ -25,13 +25,14 @@
       </van-row>
       <CountComponent @numChange="numChange"></CountComponent>
       <div class="confirm-btn-wrap">
-        <van-button round type="primary" class="confirm-btn" @click="addToCart">加入购物车</van-button>
+        <van-button round type="primary" class="confirm-btn" @click="addCart">加入购物车</van-button>
       </div>
     </van-popup>
   </div>
 </template>
 
 <script type="text/javascript">
+import { mapMutations } from 'vuex'
 import CountComponent from '../../../components/count'
 export default {
   props: {
@@ -57,17 +58,29 @@ export default {
     CountComponent
   },
   methods: {
+    ...mapMutations('shopCart', {
+      addToCart: 'addToCart'
+    }),
     isClosed () {
       //
       this.$emit('close-popup', false)
     },
+    // 商品数量
     numChange (num) {
       // console.log(num)
       this.number = num
     },
     // 加入购物车
-    addToCart () {
-      //
+    addCart () {
+      // 先处理数据
+      const cartInfo = {
+        ...this.info,
+        goodsNum: this.number,
+        isChecked: false
+      }
+      // console.log(this.number)
+      this.addToCart(cartInfo)
+      this.$emit('close-popup', false)
     }
   },
   watch: {
