@@ -5,7 +5,13 @@
     <!-- 中间显示组件 -->
     <div class="product-to-pay">
       <div class="product-to-pay-edit">
-        <van-button type="warning" @click="checkAll" size="small">全选</van-button>
+        <van-checkbox
+        v-model="checkedAll"
+        @click="checkAll"
+        icon-size="20px"
+        class="checked-all"
+        >全选</van-checkbox>
+        <!-- <van-button type="warning" @click="checkAll" size="small">全选</van-button> -->
         <van-button type="warning" @click="editProduct"  size="small" v-show="edit">编辑</van-button>
         <van-button type="warning" @click="editProduct"  size="small" v-show="!edit">完成</van-button>
       </div>
@@ -54,12 +60,26 @@ export default {
       checked: true,
       btnSize: '24px',
       edit: true
+      // checkedAll: false
     }
   },
   computed: {
     ...mapState('shopCart', {
       goodsInCart: state => state.goodsInCart
-    })
+    }),
+    // ...mapGetters('shopCart', {
+    //   checkedAll: 'checkedAll'
+    // }),使用v-model绑定报错 因为需要get 和 set 计算属性只有get
+    checkedAll: {
+      get () {
+        // console.log(this.$store)
+        return this.$store.getters['shopCart/checkedAll']
+      },
+      set (val) {
+        // console.log(val)
+        this.$store.commit('shopCart/toggleCheckBoxItem', val)
+      }
+    }
   },
   components: {
     HeaderComponent,
@@ -76,7 +96,7 @@ export default {
      * @desc 全选按钮
      */
     checkAll () {
-      this.toggleCheckBoxItem(this.checked)
+      // this.toggleCheckBoxItem(this.checked)
       // 取反
       this.checked = !this.checked
     },

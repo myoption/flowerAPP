@@ -56,6 +56,7 @@ const moduleShopCart = {
      * @param {Boolean} isChecked
      */
     toggleCheckBoxItem (state, isChecked) {
+      // console.log('shopCart mutations', isChecked)
       state.goodsInCart.forEach(item => { item.isChecked = isChecked })
     },
     /**
@@ -63,25 +64,26 @@ const moduleShopCart = {
      * @param {*} state
      */
     deleteCartItem (state) {
-      const indexs = state.goodsInCart.map(item => {
-        // 如果被勾选 则返回其索引
-        if (item.isChecked === true) {
-          const index = state.goodsInCart.indexOf(item)
-          // console.log(index)
-          if (index !== -1) {
-            return index
-          }
-        }
-      }
-      )
-      // 去除undefined
-      // indexs = indexs.filter(item => item !== undefined)
-      indexs.sort((a, b) => b - a)
-      console.log(indexs)
-      // 删除选中数据
-      indexs.forEach(item => {
-        state.goodsInCart.splice(item, 1)
-      })
+      // const indexs = state.goodsInCart.map(item => {
+      //   // 如果被勾选 则返回其索引
+      //   if (item.isChecked === true) {
+      //     const index = state.goodsInCart.indexOf(item)
+      //     // console.log(index)
+      //     if (index !== -1) {
+      //       return index
+      //     }
+      //   }
+      // }
+      // )
+      // // 去除undefined
+      // // indexs = indexs.filter(item => item !== undefined)
+      // indexs.sort((a, b) => b - a)
+      // console.log(indexs)
+      // // 删除选中数据
+      // indexs.forEach(item => {
+      //   state.goodsInCart.splice(item, 1)
+      // })
+      state.goodsInCart = state.goodsInCart.filter(item => item.isChecked === false)
     },
     /**
      * @desc 单选改变选中状态
@@ -89,7 +91,7 @@ const moduleShopCart = {
      * @param {Number} item_id
      */
     changeOne (state, id) {
-      console.log(id)
+      // console.log(id)
       // state.goodsInCart.forEach(item => {
       //   if (item.item_id === id) {
       //     item.isChecked = !item.isChecked
@@ -105,6 +107,12 @@ const moduleShopCart = {
       // state.checkedList = []
       state.checkedList = state.goodsInCart.filter(item => item.isChecked === true)
       return state.checkedList.length
+    },
+    // 全选 every收到空数组 均返回true
+    checkedAll: state => {
+      // 为0 返回false
+      if (state.goodsInCart.length === 0) return false
+      return state.goodsInCart.every(item => item.isChecked === true)
     }
   }
 }

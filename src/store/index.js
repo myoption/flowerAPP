@@ -32,6 +32,10 @@ const store = new Vuex.Store({
       state.globalInfo.user = info
       // console.log('state', state)
     }
+  //   toggleCheckBoxItem (state, val) {
+  //     console.log('index mutations', val)
+  //     shopCart.mutations.toggleCheckBoxItem(shopCart.state, val)
+  //   }
   },
   modules,
   plugins: [createPersistedState({
