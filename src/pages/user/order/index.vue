@@ -1,6 +1,6 @@
 <template>
   <div class="user-order-wrap">
-    <div class="user-order-title">
+    <div class="user-order-title" @click="toOrderList">
       <span>我的订单</span>
       <van-icon name="arrow"/>
     </div>
@@ -45,6 +45,10 @@ export default {
   components: {
   },
   methods: {
+    toOrderList (query = 'all') {
+      // 跳转到order list
+      this.$router.push('/order-list')
+    }
   }
 }
 </script>
