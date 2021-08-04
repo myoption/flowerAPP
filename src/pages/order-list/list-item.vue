@@ -1,23 +1,28 @@
 <template>
   <div class="order-list-item-wrap van-clearfix">
-    <div class="order-list-item-box" v-for="item in orderList" :key="item.keyId">
-      <div class="title-time">{{item.order_sn | timeFormat}}</div>
-      <van-card
-        :num="item.total_product_count"
-        :price="item.format_pay_price"
-        desc="描述信息"
-        :title="item.product_list[0].product_name"
-        :thumb="item.product_list[0].main_image"
-      >
-        <template #tags>
-          <van-tag plain type="danger">订单状态：{{item.order_status | orderStatusFormat}}</van-tag>
-        </template>
-        <template #footer>
-          <span class="footer-text">共计{{item.total_product_count}}件，总价&yen;{{item.format_product_total_price}}</span>
-          <van-button size="mini" class="del-btn" type="danger">删除</van-button>
-        </template>
-      </van-card>
-    </div>
+    <van-row>
+      <van-col v-for="item in orderList" :key="item.keyId">
+        <div class="order-list-item-box">
+          <div class="title-time">{{item.order_sn | timeFormat}}</div>
+          <van-card
+            :num="item.total_product_count"
+            :price="item.format_pay_price"
+            desc="描述信息"
+            :title="item.product_list[0].product_name"
+            :thumb="item.product_list[0].main_image"
+          >
+            <template #tags>
+              <van-tag plain type="danger">订单状态：{{item.order_status | orderStatusFormat}}</van-tag>
+            </template>
+            <template #footer>
+              <span class="footer-text">共计{{item.total_product_count}}件，总价&yen;{{item.format_product_total_price}}</span>
+              <van-button size="mini" class="del-btn" type="danger">删除</van-button>
+            </template>
+          </van-card>
+        </div>
+      </van-col>
+    </van-row>
+
   </div>
 </template>
 
