@@ -24,8 +24,8 @@
           -->
           <template #button>
             <span @click="isShowPwd">
-              <van-icon name="closed-eye" v-if="show" color="rgb(235, 235, 235)"/>
-              <van-icon name="eye-o" v-else color="rgb(235, 235, 235)"/>
+              <van-icon name="closed-eye" v-show="show" color="rgb(235, 235, 235)"/>
+              <van-icon name="eye-o" v-show="!show" color="rgb(235, 235, 235)"/>
             </span>
           </template>
           </van-field>

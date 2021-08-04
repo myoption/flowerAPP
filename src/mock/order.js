@@ -4,8 +4,115 @@
  * @param {*} response
  */
 const getOrderList = (request, response) => {
+  const { query } = request
+  console.log(query)
   // 订单列表
   const list = [{
+    'product_list': [{
+      'item_id': 289,
+      'sku_id': 0,
+      'product_name': '鲜花',
+      'product_price': 90,
+      'format_product_price': '0.90',
+      'count': 1,
+      'main_image': 'https://img01.hua.com/uploadpic/newpic/9012092.jpg_220x240.jpg'
+    }],
+    'created_timestamp': 1606053880,
+    'pay_status': 0,
+    'order_status': 60,
+    'total_product_count': 1,
+    'order_sn': '202011221404409316254',
+    'order_id': 2708,
+    'close_countdown': null,
+    'shipping_info': {
+      'receiver': '高富帅',
+      'address': '详细地址',
+      'phone': '15276513544',
+      'province': '上海市',
+      'city': '上海城区',
+      'area': '黄浦区'
+    },
+    'shipping_word': '订单已于2020-11-22 14:38:01超时未支付关闭',
+    'product_total_price': 90,
+    'discount_price': 0,
+    'shipping_price': 0,
+    'pay_price': 90,
+    'format_product_total_price': '0.90',
+    'format_discount_price': '0.00',
+    'format_shipping_price': '0.00',
+    'format_pay_price': '0.90'
+  },
+  {
+    'product_list': [{
+      'item_id': 289,
+      'sku_id': 0,
+      'product_name': '鲜花',
+      'product_price': 90,
+      'format_product_price': '0.90',
+      'count': 1,
+      'main_image': 'https://img01.hua.com/uploadpic/newpic/9012092.jpg_220x240.jpg'
+    }],
+    'created_timestamp': 1606053880,
+    'pay_status': 0,
+    'order_status': 60,
+    'total_product_count': 1,
+    'order_sn': '202011221404409316254',
+    'order_id': 2708,
+    'close_countdown': null,
+    'shipping_info': {
+      'receiver': '高富帅',
+      'address': '详细地址',
+      'phone': '15276513544',
+      'province': '上海市',
+      'city': '上海城区',
+      'area': '黄浦区'
+    },
+    'shipping_word': '订单已于2020-11-22 14:38:01超时未支付关闭',
+    'product_total_price': 90,
+    'discount_price': 0,
+    'shipping_price': 0,
+    'pay_price': 90,
+    'format_product_total_price': '0.90',
+    'format_discount_price': '0.00',
+    'format_shipping_price': '0.00',
+    'format_pay_price': '0.90'
+  },
+  {
+    'product_list': [{
+      'item_id': 289,
+      'sku_id': 0,
+      'product_name': '鲜花',
+      'product_price': 90,
+      'format_product_price': '0.90',
+      'count': 1,
+      'main_image': 'https://img01.hua.com/uploadpic/newpic/9012092.jpg_220x240.jpg'
+    }],
+    'created_timestamp': 1606053880,
+    'pay_status': 0,
+    'order_status': 60,
+    'total_product_count': 1,
+    'order_sn': '202011221404409316254',
+    'order_id': 2708,
+    'close_countdown': null,
+    'shipping_info': {
+      'receiver': '高富帅',
+      'address': '详细地址',
+      'phone': '15276513544',
+      'province': '上海市',
+      'city': '上海城区',
+      'area': '黄浦区'
+    },
+    'shipping_word': '订单已于2020-11-22 14:38:01超时未支付关闭',
+    'product_total_price': 90,
+    'discount_price': 0,
+    'shipping_price': 0,
+    'pay_price': 90,
+    'format_product_total_price': '0.90',
+    'format_discount_price': '0.00',
+    'format_shipping_price': '0.00',
+    'format_pay_price': '0.90'
+  },
+  {
     'product_list': [{
       'item_id': 289,
       'sku_id': 0,
@@ -85,7 +192,7 @@ const getOrderList = (request, response) => {
     }],
     'created_timestamp': 1605859843,
     'pay_status': 0,
-    'order_status': 60,
+    'order_status': 70,
     'total_product_count': 1,
     'order_sn': '202011200810431370305',
     'order_id': 2694,
@@ -119,7 +226,7 @@ const getOrderList = (request, response) => {
     }],
     'created_timestamp': 1605859756,
     'pay_status': 0,
-    'order_status': 60,
+    'order_status': 80,
     'total_product_count': 1,
     'order_sn': '202011200809161861023',
     'order_id': 2693,
@@ -153,7 +260,7 @@ const getOrderList = (request, response) => {
     }],
     'created_timestamp': 1605859595,
     'pay_status': 0,
-    'order_status': 60,
+    'order_status': 80,
     'total_product_count': 1,
     'order_sn': '202011200806359939678',
     'order_id': 2692,
@@ -187,7 +294,7 @@ const getOrderList = (request, response) => {
     }],
     'created_timestamp': 1605858232,
     'pay_status': 0,
-    'order_status': 60,
+    'order_status': 90,
     'total_product_count': 1,
     'order_sn': '202011200743527737353',
     'order_id': 2691,
@@ -221,7 +328,7 @@ const getOrderList = (request, response) => {
     }],
     'created_timestamp': 1605788651,
     'pay_status': 2,
-    'order_status': 70,
+    'order_status': 90,
     'total_product_count': 1,
     'order_sn': '202011191224119352278',
     'order_id': 2640,
@@ -289,7 +396,7 @@ const getOrderList = (request, response) => {
     }],
     'created_timestamp': 1605787446,
     'pay_status': 2,
-    'order_status': 70,
+    'order_status': 60,
     'total_product_count': 1,
     'order_sn': '202011191204066128101',
     'order_id': 2616,
@@ -323,7 +430,7 @@ const getOrderList = (request, response) => {
     }],
     'created_timestamp': 1605630006,
     'pay_status': 0,
-    'order_status': 60,
+    'order_status': 80,
     'total_product_count': 1,
     'order_sn': '202011171620069239205',
     'order_id': 2597,
@@ -346,17 +453,64 @@ const getOrderList = (request, response) => {
     'format_shipping_price': '0.00',
     'format_pay_price': '1.80'
   }]
+  let targetList = []
+  // 根据参数进行筛选不同状态的订单
+  if (query.statusCode === '0') {
+    targetList = list
+  }
+  if (query.statusCode === '1') {
+    targetList = list.filter(item => {
+      if (item.order_status === 60) {
+        return item
+      }
+    })
+  }
+  if (query.statusCode === '2') {
+    targetList = list.filter(item => {
+      if (item.order_status === 70) {
+        return item
+      }
+    })
+  }
+  if (query.statusCode === '3') {
+    targetList = list.filter(item => {
+      if (item.order_status === 80) {
+        return item
+      }
+    })
+  }
+  if (query.statusCode === '4') {
+    targetList = list.filter(item => {
+      if (item.order_status === 90) {
+        return item
+      }
+    })
+  }
+  const total = targetList.length
+  const page_info = {
+    'page_size': 1,
+    'page_num': total,
+    'index': query.currentPage,
+    'has_more': false,
+    'count': total
+  }
+  // console.log(targetList)
+  let qureyList = []
+  // 根据currentPage 返回当前的数据
+  const positison = (query.currentPage - 1) * 4
+  if (query.currentPage < page_info.page_num) {
+    qureyList = targetList.slice(positison, 6)
+    page_info.has_more = true
+  } else {
+    qureyList = targetList.slice(positison, 6)
+    page_info.has_more = false
+  }
   const result = {
     'errorCode': 0,
     'errorMessage': 'success',
     'data': {
-      'page_info': {
-        'page_size': 10,
-        'index': 1,
-        'has_more': false,
-        'count': 10
-      },
-      'order_list': list
+      'page_info': page_info,
+      'order_list': qureyList
     },
     'success': true
   }

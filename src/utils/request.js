@@ -24,10 +24,13 @@ const addToken = config => {
 }
 // 添加公共参数
 const addParams = config => {
+  // console.log(config.statusCode)
   // 公用参数对象
   const params = {
     userId,
-    deviceId
+    deviceId,
+    statusCode: config.statusCode,
+    currentPage: config.currentPage
   }
   const key = config.method === 'post' ? 'data' : 'params'
   // 参数拼接

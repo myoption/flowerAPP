@@ -1,12 +1,12 @@
 <template>
   <div class="user-order-wrap">
-    <div class="user-order-title" @click="toOrderList">
+    <div class="user-order-title" @click="toOrderList(0)">
       <span>我的订单</span>
       <van-icon name="arrow"/>
     </div>
     <div class="user-order-info">
       <!-- 使用循环渲染 -->
-      <div class="user-order-icon" v-for="icon in entrys" :key="icon.statusCode">
+      <div class="user-order-icon" v-for="icon in entrys" :key="icon.statusCode" @click="toOrderList(icon.statusCode)">
         <van-icon :name="icon.icon" class="user-order-circle"/>
         <span>{{ icon.name }}</span>
       </div>
@@ -22,22 +22,22 @@ export default {
         {
           name: '待支付',
           icon: 'pending-payment',
-          statusCode: 0
+          statusCode: 1
         },
         {
           name: '待发货',
           icon: 'free-postage',
-          statusCode: 1
+          statusCode: 2
         },
         {
           name: '待收货',
           icon: 'logistics',
-          statusCode: 2
+          statusCode: 3
         },
         {
           name: '已完成',
           icon: 'sign',
-          statusCode: 3
+          statusCode: 4
         }
       ]
     }
@@ -45,9 +45,9 @@ export default {
   components: {
   },
   methods: {
-    toOrderList (query = 'all') {
-      // 跳转到order list
-      this.$router.push('/order-list')
+    toOrderList (code) {
+      // 跳转到order list code代表进入后激活的tab页 0--全部 1--待支付 2--待发货 3--待收货 4--已完成
+      this.$router.push({ name: 'OrderList', params: { statusCode: code } })
     }
   }
 }
