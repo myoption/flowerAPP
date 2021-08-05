@@ -1,28 +1,24 @@
 <template>
   <div class="order-list-wrap">
     <HeaderComponent title="我的订单" :showGoBack="true"></HeaderComponent>
-    <van-tabs v-model="active">
-      <van-tab v-for="item in tabList" :key="item.name" :title="item.title" @click-tab="activeTab">
-        <div class="god-father-wrap">
-          <van-pull-refresh
-          v-model="refresh"
-          success-text="刷新成功"
-          @refresh="onRefresh"
-          class="pull-refresh"
+    <van-tabs v-model="active"  @change="activeTab">
+      <van-tab
+        v-for="item in tabList"
+        :key="item.name"
+        :title="item.title"
+        class="list-container"
+      >
+        <van-pull-refresh v-model="refresh" @refresh="onRefresh">
+          <van-list
+            v-model="loading"
+            :finished="finished"
+            finished-text="没有更多了"
+            :immediate-check="false"
+            @load="onLoad"
           >
-            <van-list
-              v-model="loading"
-              :finished="finished"
-              finished-text="没有更多了"
-              :immediate-check="false"
-              @load="onLoad"
-            >
-            <!-- <van-cell> -->
-              <ListItemComponent :orderList="orderList"></ListItemComponent>
-            <!-- </van-cell> -->
-            </van-list>
-          </van-pull-refresh>
-        </div>
+            <ListItemComponent :orderList="orderList"></ListItemComponent>
+          </van-list>
+        </van-pull-refresh>
       </van-tab>
     </van-tabs>
   </div>
@@ -32,6 +28,7 @@
 import HeaderComponent from '../../components/header'
 import ListItemComponent from './list-item.vue'
 import { nanoid } from 'nanoid'
+
 import * as apis from './api'
 export default {
   data () {
@@ -113,12 +110,14 @@ export default {
         // } else if (this.refresh === true) { // 如果是下拉刷新 则重新取值覆盖原来的list
         //   this.orderList = listRe
         // }
-        this.orderList = this.orderList.concat(listRe)
+        this.orderList = [
+          ...this.orderList,
+          ...listRe
+        ]
         this.page_info = res.data.page_info
         this.refresh = false
         this.loading = false
-        // this.finished = true
-        if (this.orderList.length === this.page_info.count) {
+        if (!this.page_info.has_more) {
           this.finished = true
         }
       }
@@ -132,10 +131,18 @@ export default {
       this.getOrderList(this.params)
     },
     activeTab (val) {
-      console.log(val)
+      // console.log('tab', typeof val)
+      // 调整查询参数
+      this.params.currentPage = 1
+      this.params.statusCode = val
+      // 清空之前tab的数据
+      this.orderList = []
+      this.page_info = {}
+      // tabl切换也要加载数据啊
+      this.getOrderList(this.params)
     },
     onLoad () {
-      console.log('加载更多')
+      // console.log('加载更多')
       this.loading = true
       // 页码加1
       this.params.currentPage += 1
@@ -150,11 +157,10 @@ export default {
   /deep/ .van-tabs__line {
     background-color: rgba(4, 138, 4, .8);
   }
-.god-father-wrap {
-    height: 500px;
-  }
-  /deep/ .van-list {
-    flex-direction: column;
+  .list-container {
+    height: calc(100vh - 320px);
+    overflow: auto;
+    box-sizing: border-box;
   }
 }
 </style>

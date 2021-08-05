@@ -488,8 +488,8 @@ const getOrderList = (request, response) => {
   }
   const total = targetList.length
   const page_info = {
-    'page_size': 1,
-    'page_num': total,
+    'page_size': 4,
+    'page_num': Math.ceil(total / 4),
     'index': query.currentPage,
     'has_more': false,
     'count': total
@@ -499,10 +499,10 @@ const getOrderList = (request, response) => {
   // 根据currentPage 返回当前的数据
   const positison = (query.currentPage - 1) * 4
   if (query.currentPage < page_info.page_num) {
-    qureyList = targetList.slice(positison, 6)
+    qureyList = targetList.slice(positison, query.currentPage * 4)
     page_info.has_more = true
   } else {
-    qureyList = targetList.slice(positison, 6)
+    qureyList = targetList.slice(positison, query.currentPage * 4)
     page_info.has_more = false
   }
   const result = {
@@ -518,8 +518,96 @@ const getOrderList = (request, response) => {
   response.json(result)
 }
 
+/**
+ * @desc 删除订单
+ * @param {*} request
+ * @param {*} response
+ */
+const toDelete = (request, response) => {
+  const result = {
+    'errorCode': 0,
+    'message': '已删除订单',
+    'success': true
+  }
+  response.json(result)
+}
+
+/**
+ * @desc 取消订单
+ * @param {*} request
+ * @param {*} response
+ */
+const toCancle = (request, response) => {
+  const result = {
+    'errorCode': 0,
+    'message': '已取消订单',
+    'success': true
+  }
+  response.json(result)
+}
+
+/**
+ * @desc 提醒发货
+ * @param {*} request
+ * @param {*} response
+ */
+const toRemindPacking = (request, response) => {
+  const result = {
+    'errorCode': 0,
+    'message': '已提醒商家发货',
+    'success': true
+  }
+  response.json(result)
+}
+/**
+ * @desc 确认收货
+ * @param {*} request
+ * @param {*} response
+ */
+const toSign = (request, response) => {
+  const result = {
+    'errorCode': 0,
+    'message': '请确定您已收到商品',
+    'success': true
+  }
+  response.json(result)
+}
+/**
+ * @desc 去支付
+ * @param {*} request
+ * @param {*} response
+ */
+const toPay = (request, response) => {
+  const result = {
+    'errorCode': 0,
+    'message': '跳转到支付',
+    'success': true
+  }
+  response.json(result)
+}
+
+/**
+ * @desc 查看物流
+ * @param {*} request
+ * @param {*} response
+ */
+const toCheckExpress = (request, response) => {
+  const result = {
+    'errorCode': 0,
+    'message': '暂未查询到物流信息',
+    'success': true
+  }
+  response.json(result)
+}
+
 const OrderMockApi = app => {
   app.get('/mock/order/getOrderList', getOrderList)
+  app.post('/mock/order/toDelete', toDelete)
+  app.post('/mock/order/toCancle', toCancle)
+  app.post('/mock/order/toRemindPacking', toRemindPacking)
+  app.post('/mock/order/toSign', toSign)
+  app.post('/mock/order/toPay', toPay)
+  app.post('/mock/order/toCheckExpress', toCheckExpress)
 }
 
 module.exports = OrderMockApi

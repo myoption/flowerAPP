@@ -1,9 +1,9 @@
 <template>
-  <div class="order-list-item-wrap van-clearfix">
-    <van-row>
-      <van-col v-for="item in orderList" :key="item.keyId">
-        <div class="order-list-item-box">
-          <div class="title-time">{{item.order_sn | timeFormat}}</div>
+  <div class="order-list-item-wrap">
+        <div class="order-list-item-box" v-for="item in orderList" :key="item.key">
+          <!-- 过滤器已经废弃 -->
+          <!-- <div class="title-time">{{item.order_sn | timeFormat}}</div> -->
+          <div class="title-time">{{ formatDate(item.created_timestamp)}}</div>
           <van-card
             :num="item.total_product_count"
             :price="item.format_pay_price"
@@ -12,22 +12,28 @@
             :thumb="item.product_list[0].main_image"
           >
             <template #tags>
-              <van-tag plain type="danger">订单状态：{{item.order_status | orderStatusFormat}}</van-tag>
+              <van-tag plain type="danger">订单状态：{{ orderStatus[item.order_status] }}</van-tag>
             </template>
             <template #footer>
               <span class="footer-text">共计{{item.total_product_count}}件，总价&yen;{{item.format_product_total_price}}</span>
-              <van-button size="mini" class="del-btn" type="danger">删除</van-button>
+              <div class="btn-wrap">
+                <van-button size="mini" class="del-btn"
+                v-for="(btnItem, key) in btnStatus[item.order_status]"
+                :key="key"
+                :type="btnItem.type"
+                @click="handler(btnItem.operationKey)"
+                >{{btnItem.text}}</van-button>
+              </div>
             </template>
           </van-card>
         </div>
-      </van-col>
-    </van-row>
-
   </div>
 </template>
 
 <script type="text/javascript">
-
+import * as config from './orderConfig'
+import * as apis from './api'
+import moment from 'moment'
 export default {
   props: {
     orderList: {
@@ -36,11 +42,32 @@ export default {
   },
   data () {
     return {
+      orderStatus: config.ORDERSTATUSTEXT,
+      btnStatus: config.ORDERSTATUSBUTTON
     }
   },
   components: {
   },
   methods: {
+    /**
+     * @desc 格式化时间
+     */
+    formatDate (date) {
+      return moment(date * 1000).format('YYYYMMDD hh:mm:ss')
+    },
+    /**
+     * @desc 按钮调用对应方法
+     */
+    async handler (fnName) {
+      // 调用对应的方法
+      const res = await apis[fnName]()
+      if (res && res.errorCode === 0) {
+        this.$toast({
+          type: 'success',
+          message: res.message
+        })
+      }
+    }
   },
   filters: {
     /**
@@ -82,9 +109,6 @@ export default {
 
 <style lang="less" scoped>
 .order-list-item-wrap {
-    height: calc(100vh - 340px);
-    overflow: auto;
-    box-sizing: border-box;
     margin-top: 20px;
     background-color: #F4F4F4;
     padding: 0 20px;
