@@ -128,7 +128,11 @@ export default {
       // 清除原来的数据 以便存放刷新后获得的数据
       this.orderList = []
       this.page_info = {}
-      this.getOrderList(this.params)
+      // 刷新时请求的数据是当前已请求的全部数据
+      this.getOrderList({
+        ...this.params,
+        currentPage: 1
+      })
     },
     activeTab (val) {
       // console.log('tab', typeof val)

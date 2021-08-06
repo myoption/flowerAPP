@@ -499,10 +499,10 @@ const getOrderList = (request, response) => {
   // 根据currentPage 返回当前的数据
   const positison = (query.currentPage - 1) * 4
   if (query.currentPage < page_info.page_num) {
-    qureyList = targetList.slice(positison, query.currentPage * 4)
+    qureyList = targetList.slice(positison, page_info.index * 4)
     page_info.has_more = true
   } else {
-    qureyList = targetList.slice(positison, query.currentPage * 4)
+    qureyList = targetList.slice(positison, page_info.index * 4)
     page_info.has_more = false
   }
   const result = {
